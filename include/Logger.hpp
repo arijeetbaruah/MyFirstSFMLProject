@@ -3,7 +3,7 @@
 
 #include <sstream>
 #include <iostream>
-#include "Singleton.h"
+#include "Singleton.hpp"
 
 enum class LogLevel
 {

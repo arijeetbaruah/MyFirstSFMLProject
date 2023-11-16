@@ -1,4 +1,4 @@
-#include "Logger.hpp"
+#include "../include/Logger.hpp"
 
 void Logger::setPrefix(const LogLevel& messageLevel)
 {

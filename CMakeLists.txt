@@ -11,14 +11,15 @@ FetchContent_Declare(SFML
 FetchContent_MakeAvailable(SFML)
 
 
-file(GLOB_RECURSE HEADERS "src/*.h")
+file(GLOB_RECURSE HEADERS "include/*.h")
+file(GLOB_RECURSE HEADERS_PP "include/*.hpp")
 file(GLOB_RECURSE SOURCES "src/*.cpp")
 
 include_directories(
     "src"
 )
 
-add_executable(CMakeSFMLProject ${HEADERS} ${SOURCES})
+add_executable(CMakeSFMLProject ${HEADERS} ${HEADERS_PP} ${SOURCES})
 target_link_libraries(CMakeSFMLProject PRIVATE sfml-graphics)
 target_compile_features(CMakeSFMLProject PRIVATE cxx_std_17)
 
