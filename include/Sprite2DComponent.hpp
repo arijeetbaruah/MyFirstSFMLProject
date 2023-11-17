@@ -7,6 +7,8 @@
 class Sprite2DComponent : virtual public IComponent
 {
 public:
+	const std::string ID = "Sprite2DComponent";
+
 	Sprite2DComponent(std::string texturePath);
 	virtual ~Sprite2DComponent() {}
 	void Render(sf::RenderWindow* window) override;

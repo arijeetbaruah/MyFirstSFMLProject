@@ -8,13 +8,16 @@ const float playerSpeed = 3;
 Player::Player() : BaseGameEntity("player")
 {
 	std::shared_ptr<IComponent> spriteComponent = std::shared_ptr<Sprite2DComponent>(new Sprite2DComponent("player.png"));
-	AddComponent(spriteComponent);
-	SetScale(sf::Vector2(0.3f, 0.3f));
+	AddComponent(Sprite2DComponent::ID, spriteComponent);
+	SetPosition(sf::Vector2(1000.f, 500.f));
+	//SetScale(sf::Vector2(0.3f, 0.3f));
 }
 
 void Player::Update(sf::Time& elapsed)
 {
 	BaseGameEntity::Update(elapsed);
+	SetRotation(GetRotation() + 1);
+
 	//if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 	//{
 	//	// left key is pressed: move our character

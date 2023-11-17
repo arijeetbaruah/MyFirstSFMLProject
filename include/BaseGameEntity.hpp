@@ -3,6 +3,7 @@
 
 #include<vector>
 #include<memory>
+#include <unordered_map> 
 #include <SFML/Graphics.hpp>
 #include "./IComponent.hpp"
 
@@ -17,7 +18,7 @@ public:
 
 	virtual void OnCollision(BaseGameEntity* a, BaseGameEntity* b) {}
 
-	void AddComponent(std::shared_ptr<IComponent> component);
+	void AddComponent(std::string id, std::shared_ptr<IComponent> component);
 
 	void SetPosition(sf::Vector2f position);
 	sf::Vector2f GetPosition() const;
@@ -30,7 +31,7 @@ public:
 
 protected:
 	std::string m_entityID;
-	std::vector<std::shared_ptr<IComponent>> m_components;
+	std::unordered_map<std::string, std::shared_ptr<IComponent>> m_components;
 
 	sf::Vector2f m_position;
 	float m_rotation;

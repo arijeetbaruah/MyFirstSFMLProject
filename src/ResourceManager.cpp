@@ -13,6 +13,10 @@ sf::Texture ResourceManager::GetTexture(std::string texturePath) const
 	{
 		Logger::GetInstance()->log(LogLevel::ERROR, "Unable to open texture '" + texturePath + "'");
 	}
+	else
+	{
+		Logger::GetInstance()->log(LogLevel::INFO, "Able to open texture '" + texturePath + "'");
+	}
 
 	return texture;
 }

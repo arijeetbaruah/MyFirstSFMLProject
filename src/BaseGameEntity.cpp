@@ -1,8 +1,12 @@
 #include "../include/BaseGameEntity.hpp"
 #include "../include/Sprite2DComponent.hpp"
+#include <combaseapi.h>
 
-BaseGameEntity::BaseGameEntity(std::string entityID)
+BaseGameEntity::BaseGameEntity(std::string entityID) : m_position(0.f, 0.f), m_scale(1.f, 1.f), m_rotation(0)
 {
+	GUID gidRef;
+	HRESULT hCreateGuid = CoCreateGuid(&gidRef);
+
 	m_entityID = entityID;
 }
 
@@ -10,7 +14,7 @@ void BaseGameEntity::Render(sf::RenderWindow* window)
 {
 	for (auto it = m_components.begin(); it != m_components.end(); it++)
 	{
-		it->get()->Render(window);
+		it->second.get()->Render(window);
 	}
 }
 
@@ -18,7 +22,7 @@ void BaseGameEntity::Update(sf::Time& elapsed)
 {
 	for (auto it = m_components.begin(); it != m_components.end(); it++)
 	{
-		IComponent* component = it->get();
+		IComponent* component = it->second.get();
 
 		component->SetPosition(GetPosition());
 		component->SetRotation(GetRotation());
@@ -28,9 +32,9 @@ void BaseGameEntity::Update(sf::Time& elapsed)
 	}
 }
 
-void BaseGameEntity::AddComponent(std::shared_ptr<IComponent> component)
+void BaseGameEntity::AddComponent(std::string id, std::shared_ptr<IComponent> component)
 {
-	m_components.push_back(component);
+	m_components.insert_or_assign(id, component);
 }
 
 void BaseGameEntity::SetPosition(sf::Vector2f position)

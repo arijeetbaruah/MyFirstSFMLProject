@@ -8,6 +8,7 @@ Sprite2DComponent::Sprite2DComponent(std::string texturePath)
 	m_texture = resourceManager->GetTexture(texturePath);
 	m_texture.setSmooth(true);
 	m_sprite.setTexture(m_texture);
+	m_sprite.setOrigin(m_sprite.getLocalBounds().width / 2.f, m_sprite.getLocalBounds().height / 2.f);
 }
 
 void Sprite2DComponent::Render(sf::RenderWindow* window)
