@@ -2,12 +2,19 @@
 #include "../include/Sprite2DComponent.hpp"
 #include <combaseapi.h>
 
-BaseGameEntity::BaseGameEntity(std::string entityID) : m_position(0.f, 0.f), m_scale(1.f, 1.f), m_rotation(0)
+BaseGameEntity::BaseGameEntity(std::string entityID, sf::Transformable* transform)
 {
 	GUID gidRef;
 	HRESULT hCreateGuid = CoCreateGuid(&gidRef);
 
+	m_tranform = new Transform();
 	m_entityID = entityID;
+}
+
+BaseGameEntity::~BaseGameEntity()
+{
+	delete m_tranform;
+	m_tranform = nullptr;
 }
 
 void BaseGameEntity::Render(sf::RenderWindow* window)
@@ -22,13 +29,7 @@ void BaseGameEntity::Update(sf::Time& elapsed)
 {
 	for (auto it = m_components.begin(); it != m_components.end(); it++)
 	{
-		IComponent* component = it->second.get();
-
-		component->SetPosition(GetPosition());
-		component->SetRotation(GetRotation());
-		component->SetScale(GetScale());
-
-		component->Update(elapsed);
+		it->second.get()->Update(elapsed);
 	}
 }
 
@@ -37,32 +38,7 @@ void BaseGameEntity::AddComponent(std::string id, std::shared_ptr<IComponent> co
 	m_components.insert_or_assign(id, component);
 }
 
-void BaseGameEntity::SetPosition(sf::Vector2f position)
+Transform* BaseGameEntity::GetTransform() const
 {
-	m_position = position;
-}
-
-sf::Vector2f BaseGameEntity::GetPosition() const
-{
-	return m_position;
-}
-
-void BaseGameEntity::SetRotation(float rotation)
-{
-	m_rotation = rotation;
-}
-
-float BaseGameEntity::GetRotation() const
-{
-	return m_rotation;
-}
-
-void BaseGameEntity::SetScale(sf::Vector2f scale)
-{
-	m_scale = scale;
-}
-
-sf::Vector2f BaseGameEntity::GetScale() const
-{
-	return m_scale;
+	return m_tranform;
 }

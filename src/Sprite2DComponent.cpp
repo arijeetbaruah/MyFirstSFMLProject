@@ -1,7 +1,9 @@
 #include "../include/Sprite2DComponent.hpp"
 #include "../include/ResourceManager.hpp"
 
-Sprite2DComponent::Sprite2DComponent(std::string texturePath)
+const std::string Sprite2DComponent::ID = "Sprite2DComponent";
+
+Sprite2DComponent::Sprite2DComponent(std::string texturePath, Transform* tranform) : m_tranform(tranform)
 {
 	ResourceManager* resourceManager = ResourceManager::GetInstance();
 
@@ -9,6 +11,8 @@ Sprite2DComponent::Sprite2DComponent(std::string texturePath)
 	m_texture.setSmooth(true);
 	m_sprite.setTexture(m_texture);
 	m_sprite.setOrigin(m_sprite.getLocalBounds().width / 2.f, m_sprite.getLocalBounds().height / 2.f);
+
+	tranform->SetTransformable(dynamic_cast<sf::Transformable*>(&m_sprite));
 }
 
 void Sprite2DComponent::Render(sf::RenderWindow* window)
@@ -18,34 +22,7 @@ void Sprite2DComponent::Render(sf::RenderWindow* window)
 
 void Sprite2DComponent::Update(sf::Time& time)
 {
-}
-
-void Sprite2DComponent::SetPosition(sf::Vector2f position)
-{
-	m_sprite.setPosition(position);
-}
-
-sf::Vector2f Sprite2DComponent::GetPosition() const
-{
-	return m_sprite.getPosition();
-}
-
-void Sprite2DComponent::SetRotation(float rotation)
-{
-	m_sprite.setRotation(rotation);
-}
-
-float Sprite2DComponent::GetRotation() const
-{
-	return m_sprite.getRotation();
-}
-
-void Sprite2DComponent::SetScale(sf::Vector2f scale)
-{
-	m_sprite.setScale(scale);
-}
-
-sf::Vector2f Sprite2DComponent::GetScale() const
-{
-	return m_sprite.getScale();
+	m_sprite.setPosition(m_tranform->GetPosition());
+	m_sprite.setRotation(m_tranform->GetRotation());
+	m_sprite.setScale(m_tranform->GetScale());
 }

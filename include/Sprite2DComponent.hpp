@@ -3,28 +3,21 @@
 
 #include <SFML/Graphics.hpp>
 #include "./IComponent.hpp"
+#include "./Transform.hpp"
 
 class Sprite2DComponent : virtual public IComponent
 {
 public:
-	const std::string ID = "Sprite2DComponent";
+	static const std::string ID;
 
-	Sprite2DComponent(std::string texturePath);
+	Sprite2DComponent(std::string texturePath, Transform* tranform);
 	virtual ~Sprite2DComponent() {}
 	void Render(sf::RenderWindow* window) override;
 	void Update(sf::Time& elapsed) override;
-
-	void SetPosition(sf::Vector2f position);
-	sf::Vector2f GetPosition() const;
-
-	void SetRotation(float rotation);
-	float GetRotation() const;
-
-	void SetScale(sf::Vector2f scale);
-	sf::Vector2f GetScale() const;
 protected:
 	sf::Texture m_texture;
 	sf::Sprite m_sprite;
+	Transform* m_tranform;
 };
 
 #endif
