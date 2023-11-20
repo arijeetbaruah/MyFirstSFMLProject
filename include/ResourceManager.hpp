@@ -8,8 +8,8 @@
 class ResourceManager : public Singleton<ResourceManager>
 {
 public:
-	sf::Texture GetTexture(std::string file) const;
-	sf::Font LoadFont(std::string fontPath) const;
+	bool GetTexture(std::string filePath, sf::Texture& texture) const;
+	bool LoadFont(std::string fontPath, sf::Font& font) const;
 };
 
 #endif

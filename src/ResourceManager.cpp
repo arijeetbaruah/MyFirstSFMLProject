@@ -4,35 +4,30 @@
 
 const std::string ASSET_FILE = "../assets/";
 
-sf::Texture ResourceManager::GetTexture(std::string texturePath) const
+bool ResourceManager::GetTexture(std::string texturePath, sf::Texture& texture) const
 {
 	std::string filePath = ASSET_FILE + "images/" + texturePath;
 
-	sf::Texture texture;
-	if (!texture.loadFromFile(filePath))
-	{
-		Logger::GetInstance()->log(LogLevel::ERROR, "Unable to open texture '" + texturePath + "'");
-	}
-	else
+	if (texture.loadFromFile(filePath))
 	{
 		Logger::GetInstance()->log(LogLevel::INFO, "Able to open texture '" + texturePath + "'");
+		return true;
 	}
 
-	return texture;
+	Logger::GetInstance()->log(LogLevel::ERROR, "Unable to open texture '" + texturePath + "'");
+	return false;
 }
 
-sf::Font ResourceManager::LoadFont(std::string fontPath) const
+bool ResourceManager::LoadFont(std::string fontPath, sf::Font& font) const
 {
 	std::string filePath = ASSET_FILE + "fonts/" + fontPath;
 
-	sf::Font font;
 	if (font.loadFromFile(filePath))
 	{
 		Logger::GetInstance()->log(LogLevel::INFO, "Loaded Font:" + fontPath);
-
-		return font;
+		return true;
 	}
 
 	Logger::GetInstance()->log(LogLevel::ERROR, "Unable to load Font:" + fontPath);
-	return font;
+	return false;
 }

@@ -6,10 +6,10 @@ class BaseGameEntity;
 class GameState : public BaseSceneState
 {
 public:
-	GameState(std::shared_ptr<BaseStateMachine> stateMachine);
+	GameState(BaseStateMachine* stateMachine);
 
 	void OnEntry() override;
-	void OnUpdate(sf::Time elapsed) override;
+	void OnUpdate(sf::RenderWindow& window, sf::Time elapsed) override;
 	void OnExit() override;
 	void Render(sf::RenderWindow* window) override;
 

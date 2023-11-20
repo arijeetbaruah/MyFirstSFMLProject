@@ -1,18 +1,24 @@
 #ifndef MAINMENUSTATE_H
 #include "./BaseSceneState.hpp"
 
-class MainMenuState : BaseSceneState
+class Button;
+
+class MainMenuState : public BaseSceneState
 {
 public:
-	MainMenuState(std::shared_ptr<BaseStateMachine> stateMachine);
+	MainMenuState(BaseStateMachine* stateMachine);
 
 	void OnEntry() override;
-	void OnUpdate(sf::Time elapsed) override;
+	void OnUpdate(sf::RenderWindow& window, sf::Time elapsed) override;
 	void OnExit() override;
 	void Render(sf::RenderWindow* window) override;
 
 private:
+	sf::Font font;
 	sf::Text titleTxt;
+
+	Button* playBtn;
+	Button* exitBtn;
 };
 
 #endif

@@ -7,10 +7,12 @@ Sprite2DComponent::Sprite2DComponent(std::string texturePath, Transform* tranfor
 {
 	ResourceManager* resourceManager = ResourceManager::GetInstance();
 
-	m_texture = resourceManager->GetTexture(texturePath);
-	m_texture.setSmooth(true);
-	m_sprite.setTexture(m_texture);
-	m_sprite.setOrigin(m_sprite.getLocalBounds().width / 2.f, m_sprite.getLocalBounds().height / 2.f);
+	if (resourceManager->GetTexture(texturePath, m_texture))
+	{
+		m_texture.setSmooth(true);
+		m_sprite.setTexture(m_texture);
+		m_sprite.setOrigin(m_sprite.getLocalBounds().width / 2.f, m_sprite.getLocalBounds().height / 2.f);
+	}
 
 	tranform->SetTransformable(dynamic_cast<sf::Transformable*>(&m_sprite));
 }

@@ -1,7 +1,7 @@
 #include "../include/GameState.hpp"
 #include "../include/Player.hpp"
 
-GameState::GameState(std::shared_ptr<BaseStateMachine> stateMachine) : BaseSceneState(stateMachine)
+GameState::GameState(BaseStateMachine* stateMachine) : BaseSceneState(stateMachine)
 {
 	m_player = new Player();
 }
@@ -11,7 +11,7 @@ void GameState::OnEntry()
 
 }
 
-void GameState::OnUpdate(sf::Time elapsed)
+void GameState::OnUpdate(sf::RenderWindow& window, sf::Time elapsed)
 {
 	m_player->Update(elapsed);
 }

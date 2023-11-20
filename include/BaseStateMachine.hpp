@@ -7,10 +7,11 @@ class BaseStateMachine
 {
 public:
 	BaseStateMachine();
-	void Update(sf::Time elapsed);
-	void SwitchState(std::shared_ptr<BaseState> state);
+	~BaseStateMachine();
+	void Update(sf::RenderWindow& window, sf::Time elapsed);
+	void SwitchState(BaseState* state);
 protected:
-	std::shared_ptr<BaseState> m_currentState;
+	BaseState* m_currentState;
 };
 
 #endif // !BASESTATEMACHINE_H

@@ -24,7 +24,7 @@ int main()
 	text.setCharacterSize(24);
 	text.setFillColor(sf::Color::Red);*/
 
-	std::shared_ptr<SceneStateMachine> sceneStateMachine = std::shared_ptr<SceneStateMachine>(new SceneStateMachine());
+	SceneStateMachine* sceneStateMachine = new SceneStateMachine();
 
 	sf::Clock clock;
 	while (window.isOpen())
@@ -45,7 +45,7 @@ int main()
 			}
 		}
 
-		sceneStateMachine->Update(elapsed);
+		sceneStateMachine->Update(window, elapsed);
 
 		window.clear();
 
@@ -54,4 +54,7 @@ int main()
 
 		window.display();
 	}
+
+	delete sceneStateMachine;
+	sceneStateMachine = nullptr;
 }

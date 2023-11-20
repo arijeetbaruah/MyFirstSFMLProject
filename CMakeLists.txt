@@ -8,7 +8,9 @@ include(FetchContent)
 FetchContent_Declare(SFML
     GIT_REPOSITORY https://github.com/SFML/SFML.git
     GIT_TAG 2.6.x)
-FetchContent_MakeAvailable(SFML)
+FetchContent_Declare(GLM
+    GIT_REPOSITORY https://github.com/g-truc/glm.git)
+FetchContent_MakeAvailable(SFML GLM)
 
 
 file(GLOB_RECURSE HEADERS "include/*.h")
@@ -21,6 +23,7 @@ include_directories(
 
 add_executable(CMakeSFMLProject ${HEADERS} ${HEADERS_PP} ${SOURCES})
 target_link_libraries(CMakeSFMLProject PRIVATE sfml-graphics)
+target_link_libraries(CMakeSFMLProject PRIVATE glm::glm)
 target_compile_features(CMakeSFMLProject PRIVATE cxx_std_17)
 
 if(WIN32)

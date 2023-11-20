@@ -6,15 +6,24 @@ BaseStateMachine::BaseStateMachine()
 	m_currentState = nullptr;
 }
 
-void BaseStateMachine::Update(sf::Time elapsed)
+BaseStateMachine::~BaseStateMachine()
 {
 	if (m_currentState != nullptr)
 	{
-		m_currentState->OnUpdate(elapsed);
+		delete m_currentState;
+		m_currentState = nullptr;
 	}
 }
 
-void BaseStateMachine::SwitchState(std::shared_ptr<BaseState> nextState)
+void BaseStateMachine::Update(sf::RenderWindow& window, sf::Time elapsed)
+{
+	if (m_currentState != nullptr)
+	{
+		m_currentState->OnUpdate(window, elapsed);
+	}
+}
+
+void BaseStateMachine::SwitchState(BaseState* nextState)
 {
 	Logger* logger = Logger::GetInstance();
 	std::string stateName;
@@ -24,6 +33,8 @@ void BaseStateMachine::SwitchState(std::shared_ptr<BaseState> nextState)
 		stateName = typeid(m_currentState).name();
 		logger->log(LogLevel::INFO, "Exiting State " + stateName);
 		m_currentState->OnExit();
+		delete m_currentState;
+		m_currentState = nullptr;
 	}
 
 	m_currentState = nextState;

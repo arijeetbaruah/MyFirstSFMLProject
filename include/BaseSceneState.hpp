@@ -3,10 +3,10 @@
 
 #include "./BaseState.hpp"
 
-class BaseSceneState : BaseState
+class BaseSceneState : public BaseState
 {
 public:
-	BaseSceneState(std::shared_ptr<BaseStateMachine> stateMachine) : BaseState(stateMachine) {}
+	BaseSceneState(BaseStateMachine* stateMachine) : BaseState(stateMachine) {}
 	virtual void Render(sf::RenderWindow* window) = 0;
 };
 
