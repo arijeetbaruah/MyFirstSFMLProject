@@ -1,7 +1,7 @@
 #include "../include/Player.hpp"
-#include <memory>
 #include "../include/ResourceManager.hpp"
 #include "../include/Sprite2DComponent.hpp"
+#include <glm/vec2.hpp>
 
 const float playerSpeed = 3;
 const float rotSpeed = 3;
@@ -10,8 +10,8 @@ Player::Player() : BaseGameEntity("player", nullptr)
 {
 	std::shared_ptr<IComponent> spriteComponent = std::shared_ptr<Sprite2DComponent>(new Sprite2DComponent("player.png", GetTransform()));
 	AddComponent(Sprite2DComponent::ID, spriteComponent);
-	GetTransform()->SetPosition(sf::Vector2(1000.f, 500.f));
-	GetTransform()->SetScale(sf::Vector2(0.3f, 0.3f));
+	GetTransform()->SetPosition(glm::vec2(1000.f, 500.f));
+	GetTransform()->SetScale(glm::vec2(0.3f, 0.3f));
 }
 
 void Player::Update(sf::Time& elapsed)
@@ -31,13 +31,15 @@ void Player::Update(sf::Time& elapsed)
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 	{
 		// left key is pressed: move our character
-		auto transform = GetTransform();
-		transform->SetPosition(transform->GetPosition() + transform->GetForward() * playerSpeed);
+		GetTransform()->Move(glm::vec2(0, -1) * playerSpeed);
+		/*auto transform = GetTransform();
+		transform->SetPosition(transform->GetPosition() + transform->GetForward() * playerSpeed);*/
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 	{
 		// left key is pressed: move our character
-		auto transform = GetTransform();
-		transform->SetPosition(transform->GetPosition() - transform->GetForward() * playerSpeed);
+		GetTransform()->Move(glm::vec2(0, 1) * playerSpeed);
+		/*auto transform = GetTransform();
+		transform->SetPosition(transform->GetPosition() - transform->GetForward() * playerSpeed);*/
 	}
 }

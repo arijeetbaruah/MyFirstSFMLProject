@@ -1,11 +1,10 @@
 #include "../include/Button.hpp"
 #include "../include/ResourceManager.hpp"
-#include "../include/VectorConverter.hpp"
 
-Button::Button(std::string text, glm::vec2 position, glm::vec2 size, sf::Color idleColor, sf::Color hoverColor)
+#include "SFML/Graphics.hpp"
+
+Button::Button(std::string text, sf::Vector2f position, sf::Vector2f size, sf::Color idleColor, sf::Color hoverColor)
 	: idleColor(idleColor), hoverColor(hoverColor), isHovered(false) {
-	shape.setPosition(VectorConverter::glmToSfml(position));
-	shape.setSize(VectorConverter::glmToSfml(size));
 	shape.setFillColor(idleColor);
 
 	if (ResourceManager::GetInstance()->LoadFont("Roboto-Black.ttf", font))
@@ -15,7 +14,7 @@ Button::Button(std::string text, glm::vec2 position, glm::vec2 size, sf::Color i
 		titleTxt.setString(text);
 		titleTxt.setCharacterSize(24);
 		titleTxt.setFillColor(sf::Color::Black);
-		titleTxt.setPosition(VectorConverter::glmToSfml(position + size / 4.f));
+		titleTxt.setPosition(position + size / 4.f);
 	}
 }
 

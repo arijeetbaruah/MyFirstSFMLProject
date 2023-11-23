@@ -1,7 +1,7 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 
-const long PI = 3.1415926536f;
+#include <glm/ext/scalar_constants.hpp>
 
 float Dot(const sf::Vector2f& v1, const sf::Vector2f& v2)
 {
@@ -15,7 +15,7 @@ sf::Vector2f Cross(const sf::Vector2f& v1, const sf::Vector2f& v2)
 
 double DegreeToRadian(const double rad)
 {
-    return PI / 180;
+    return glm::pi<float>() / 180;
 }
 
 #endif

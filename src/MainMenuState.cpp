@@ -18,8 +18,8 @@ MainMenuState::MainMenuState(BaseStateMachine* stateMachine) : BaseSceneState(st
 		titleTxt.setFillColor(sf::Color::Red);
 	}
 
-	playBtn = new Button("Play", glm::vec2(1920u / 2, 1080u / 2 - 50), glm::vec2(100, 50), sf::Color::Blue, sf::Color::Red);
-	exitBtn = new Button("Exit", glm::vec2(1920u / 2, 1080u / 2 - 50 + 100), glm::vec2(100, 50), sf::Color::Blue, sf::Color::Red);
+	playBtn = new Button("Play", sf::Vector2f(1920u / 2, 1080u / 2 - 50), sf::Vector2f(100, 50), sf::Color::Blue, sf::Color::Red);
+	exitBtn = new Button("Exit", sf::Vector2f(1920u / 2, 1080u / 2 - 50 + 100), sf::Vector2f(100, 50), sf::Color::Blue, sf::Color::Red);
 }
 
 void MainMenuState::OnEntry()
@@ -37,6 +37,7 @@ void MainMenuState::OnUpdate(sf::RenderWindow& window, sf::Time elapsed)
 		GameState* nextState;
 
 		m_stateMachine->SwitchState(new GameState(m_stateMachine));
+		return;
 	}
 
 	if (exitBtn->isPressed())

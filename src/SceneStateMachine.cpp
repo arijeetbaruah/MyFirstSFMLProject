@@ -1,10 +1,11 @@
 #include "../include/BaseSceneState.hpp"
 #include "../include/SceneStateMachine.hpp"
-#include "../include/MainMenuState.hpp"
+#include "../include/GameState.hpp"
 
 SceneStateMachine::SceneStateMachine() : BaseStateMachine()
 {
-	m_currentState = new MainMenuState(this);
+	//m_currentState = new MainMenuState(this);
+	m_currentState = new GameState(this);
 	m_currentState->OnEntry();
 	//m_currentState = mainMenuState;
 }

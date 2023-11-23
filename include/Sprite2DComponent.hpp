@@ -18,6 +18,7 @@ protected:
 	sf::Texture m_texture;
 	sf::Sprite m_sprite;
 	Transform* m_tranform;
+	sf::FloatRect boundingBox;
 };
 
 #endif
