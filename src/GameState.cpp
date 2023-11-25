@@ -1,9 +1,11 @@
 #include "../include/GameState.hpp"
 #include "../include/Player.hpp"
+#include "../include/EntityManager.hpp"
 
 GameState::GameState(BaseStateMachine* stateMachine) : BaseSceneState(stateMachine)
 {
-	m_player = new Player();
+	auto m_player = EntityManager::GetInstance()->CreateEntity("Player", "Player");
+	auto m_astriod1 = EntityManager::GetInstance()->CreateEntity("Asteroid", "Asteroid1");
 }
 
 void GameState::OnEntry()
@@ -13,15 +15,10 @@ void GameState::OnEntry()
 
 void GameState::OnUpdate(sf::RenderWindow& window, sf::Time elapsed)
 {
-	m_player->Update(elapsed);
+
 }
 
 void GameState::OnExit()
 {
 
-}
-
-void GameState::Render(sf::RenderWindow* window)
-{
-	m_player->Render(window);
 }

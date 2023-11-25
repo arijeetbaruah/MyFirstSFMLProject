@@ -3,6 +3,7 @@
 #include "../include/ResourceManager.hpp"
 #include "../include/Logger.hpp"
 #include "../include/GameState.hpp"
+#include "../include/EntityManager.hpp"
 #include "../include/BaseStateMachine.hpp"
 
 MainMenuState::MainMenuState(BaseStateMachine* stateMachine) : BaseSceneState(stateMachine)
@@ -18,8 +19,11 @@ MainMenuState::MainMenuState(BaseStateMachine* stateMachine) : BaseSceneState(st
 		titleTxt.setFillColor(sf::Color::Red);
 	}
 
-	playBtn = new Button("Play", sf::Vector2f(1920u / 2, 1080u / 2 - 50), sf::Vector2f(100, 50), sf::Color::Blue, sf::Color::Red);
-	exitBtn = new Button("Exit", sf::Vector2f(1920u / 2, 1080u / 2 - 50 + 100), sf::Vector2f(100, 50), sf::Color::Blue, sf::Color::Red);
+	EntityManager* em = EntityManager::GetInstance();
+	playBtn = std::make_shared<Button>("playBtn", "Play", sf::Vector2f(0, 50), sf::Vector2f(100, 50), sf::Color::Blue, sf::Color::Red);
+	em->AddEntity(playBtn);
+	exitBtn = std::make_shared<Button>("exitBtn", "Exit", sf::Vector2f(0, 50 + 100), sf::Vector2f(100, 50), sf::Color::Blue, sf::Color::Red);
+	em->AddEntity(exitBtn);
 }
 
 void MainMenuState::OnEntry()
@@ -29,9 +33,6 @@ void MainMenuState::OnEntry()
 
 void MainMenuState::OnUpdate(sf::RenderWindow& window, sf::Time elapsed)
 {
-	playBtn->Update(window);
-	exitBtn->Update(window);
-
 	if (playBtn->isPressed())
 	{
 		GameState* nextState;
@@ -46,11 +47,9 @@ void MainMenuState::OnUpdate(sf::RenderWindow& window, sf::Time elapsed)
 	}
 }
 
-void MainMenuState::Render(sf::RenderWindow* window)
+void MainMenuState::Render(sf::RenderWindow& window)
 {
-	window->draw(titleTxt);
-	playBtn->Render(window);
-	exitBtn->Render(window);
+	window.draw(titleTxt);
 }
 
 void MainMenuState::OnExit()

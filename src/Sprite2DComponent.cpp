@@ -12,22 +12,26 @@ Sprite2DComponent::Sprite2DComponent(std::string texturePath, Transform* tranfor
 		m_texture.setSmooth(true);
 		m_sprite.setTexture(m_texture);
 		m_sprite.setOrigin(m_sprite.getLocalBounds().width / 2.f, m_sprite.getLocalBounds().height / 2.f);
-		boundingBox = m_sprite.getGlobalBounds();
 	}
 
 	tranform->SetTransformable(dynamic_cast<sf::Transformable*>(&m_sprite));
 }
 
-void Sprite2DComponent::Render(sf::RenderWindow* window)
+void Sprite2DComponent::Render(sf::RenderWindow& window)
 {
-	window->draw(m_sprite);
+	window.draw(m_sprite);
 }
 
-void Sprite2DComponent::Update(sf::Time& time)
+void Sprite2DComponent::Update(sf::RenderWindow& window, sf::Time& time)
 {
 	auto pos = m_tranform->GetPosition();
 	auto scale = m_tranform->GetScale();
 	m_sprite.setPosition(pos.x, pos.y);
 	m_sprite.setRotation(m_tranform->GetRotation());
 	m_sprite.setScale(scale.x, scale.y);
+}
+
+sf::FloatRect Sprite2DComponent::GetBoundingBox() const
+{
+	return m_sprite.getGlobalBounds();
 }

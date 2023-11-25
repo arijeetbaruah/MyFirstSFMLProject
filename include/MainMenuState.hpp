@@ -11,14 +11,14 @@ public:
 	void OnEntry() override;
 	void OnUpdate(sf::RenderWindow& window, sf::Time elapsed) override;
 	void OnExit() override;
-	void Render(sf::RenderWindow* window) override;
+	void Render(sf::RenderWindow& window) override;
 
 private:
 	sf::Font font;
 	sf::Text titleTxt;
 
-	Button* playBtn;
-	Button* exitBtn;
+	std::shared_ptr<Button> playBtn;
+	std::shared_ptr<Button> exitBtn;
 };
 
 #endif

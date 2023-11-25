@@ -14,13 +14,16 @@ public:
 	BaseGameEntity(std::string entityID, sf::Transformable* transform);
 	virtual ~BaseGameEntity();
 
-	virtual void Render(sf::RenderWindow* window);
-	virtual void Update(sf::Time& elapsed);
+	std::string GetID() { return m_entityID; }
 
-	virtual void OnCollision(BaseGameEntity* a, BaseGameEntity* b) {}
+	virtual void Render(sf::RenderWindow& window);
+	virtual void Update(sf::RenderWindow& window, sf::Time& elapsed);
+
+	virtual void OnCollision(std::shared_ptr<BaseGameEntity> other) {}
 
 	void AddComponent(std::string id, std::shared_ptr<IComponent> component);
 	Transform* GetTransform() const;
+	virtual sf::FloatRect GetBoundingBox() const { return sf::FloatRect(); }
 
 protected:
 	std::string m_entityID;

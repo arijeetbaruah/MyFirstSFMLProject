@@ -2,6 +2,7 @@
 #include <iostream>
 
 #include "../include/Logger.hpp"
+#include "../include/EntityManager.hpp"
 #include "../include/SceneStateMachine.hpp"
 
 const float playerSpeed = 3;
@@ -13,16 +14,7 @@ int main()
 	auto window = sf::RenderWindow{ { 1920u, 1080u }, "Arijeet's SFML Project" };
 	window.setFramerateLimit(144);
 
-	/*ResourceManager* resourceManager = ResourceManager::GetInstance();
-
-	sf::Font font = resourceManager->LoadFont("Roboto-Black.ttf");
-
-	sf::Text text;
-	text.setFont(font);
-	text.setStyle(sf::Text::Bold | sf::Text::Underlined);
-	text.setString("Hello world");
-	text.setCharacterSize(24);
-	text.setFillColor(sf::Color::Red);*/
+	EntityManager* em = EntityManager::GetInstance();
 
 	SceneStateMachine* sceneStateMachine = new SceneStateMachine();
 
@@ -46,11 +38,12 @@ int main()
 		}
 
 		sceneStateMachine->Update(window, elapsed);
+		em->Update(window, elapsed);
 
 		window.clear();
 
-		//window.draw(text);
-		sceneStateMachine->Render(&window);
+		sceneStateMachine->Render(window);
+		em->Render(window);
 
 		window.display();
 	}

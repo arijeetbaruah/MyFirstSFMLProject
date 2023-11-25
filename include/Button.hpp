@@ -1,24 +1,20 @@
 #ifndef BUTTON_H
 
 #include "SFML/Graphics.hpp"
+#include "./BaseGameEntity.hpp"
 
-class Button
+class ButtonComponent;
+
+class Button : public virtual BaseGameEntity
 {
 public:
-	Button(std::string text, sf::Vector2f position, sf::Vector2f size, sf::Color idleColor, sf::Color hoverColor);
-	void Update(sf::RenderWindow& window);
-	void Render(sf::RenderWindow* window);
+	Button(std::string id, std::string text, sf::Vector2f position, sf::Vector2f size, sf::Color idleColor, sf::Color hoverColor);
+	void Update(sf::RenderWindow& window, sf::Time& elapsed) override;
+	void Render(sf::RenderWindow& window) override;
 
 	bool isPressed();
-
-private:
-	sf::RectangleShape shape;
-	sf::Color idleColor;
-	sf::Color hoverColor;
-	bool isHovered;
-
-	sf::Font font;
-	sf::Text titleTxt;
+protected:
+	std::shared_ptr<ButtonComponent> m_buttonComponent;
 };
 
 #endif // !BUTTON_H

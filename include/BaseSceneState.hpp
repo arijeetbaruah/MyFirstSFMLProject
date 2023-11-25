@@ -7,7 +7,7 @@ class BaseSceneState : public BaseState
 {
 public:
 	BaseSceneState(BaseStateMachine* stateMachine) : BaseState(stateMachine) {}
-	virtual void Render(sf::RenderWindow* window) = 0;
+	virtual void Render(sf::RenderWindow& window) {}
 };
 
 #endif // !BASESCENESTATE_H

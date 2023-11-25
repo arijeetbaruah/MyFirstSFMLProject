@@ -12,13 +12,14 @@ public:
 
 	Sprite2DComponent(std::string texturePath, Transform* tranform);
 	virtual ~Sprite2DComponent() {}
-	void Render(sf::RenderWindow* window) override;
-	void Update(sf::Time& elapsed) override;
+	void Render(sf::RenderWindow& window) override;
+	void Update(sf::RenderWindow& window, sf::Time& elapsed) override;
+
+	sf::FloatRect GetBoundingBox() const;
 protected:
 	sf::Texture m_texture;
 	sf::Sprite m_sprite;
 	Transform* m_tranform;
-	sf::FloatRect boundingBox;
 };
 
 #endif
