@@ -11,7 +11,7 @@
 class BaseGameEntity
 {
 public:
-	BaseGameEntity(std::string entityID, sf::Transformable* transform);
+	BaseGameEntity(std::string entityID);
 	virtual ~BaseGameEntity();
 
 	std::string GetID() { return m_entityID; }
@@ -22,7 +22,8 @@ public:
 	virtual void OnCollision(std::shared_ptr<BaseGameEntity> other) {}
 
 	void AddComponent(std::string id, std::shared_ptr<IComponent> component);
-	Transform* GetTransform() const;
+	Transform* GetTransform();
+	void SetTransform(Transform* transform);
 	virtual sf::FloatRect GetBoundingBox() const { return sf::FloatRect(); }
 
 protected:

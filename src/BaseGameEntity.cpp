@@ -1,7 +1,7 @@
 #include "../include/BaseGameEntity.hpp"
 #include "../include/Sprite2DComponent.hpp"
 
-BaseGameEntity::BaseGameEntity(std::string entityID, sf::Transformable* transform)
+BaseGameEntity::BaseGameEntity(std::string entityID)
 {
 	m_tranform = new Transform();
 	m_entityID = entityID;
@@ -34,7 +34,17 @@ void BaseGameEntity::AddComponent(std::string id, std::shared_ptr<IComponent> co
 	m_components.insert_or_assign(id, component);
 }
 
-Transform* BaseGameEntity::GetTransform() const
+Transform* BaseGameEntity::GetTransform()
 {
+	if (m_tranform == nullptr)
+	{
+		m_tranform = new Transform();
+	}
+
 	return m_tranform;
+}
+
+void BaseGameEntity::SetTransform(Transform* transform)
+{
+	m_tranform = transform;
 }

@@ -7,7 +7,7 @@
 const float playerSpeed = 3;
 const float rotSpeed = 3;
 
-Player::Player(std::string id) : BaseGameEntity( id, nullptr)
+Player::Player(std::string id) : BaseGameEntity(id)
 {
 	m_spriteComponent = std::shared_ptr<Sprite2DComponent>(new Sprite2DComponent("player.png", GetTransform()));
 	AddComponent(Sprite2DComponent::ID, m_spriteComponent);

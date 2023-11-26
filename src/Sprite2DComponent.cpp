@@ -31,6 +31,11 @@ void Sprite2DComponent::Update(sf::RenderWindow& window, sf::Time& time)
 	m_sprite.setScale(scale.x, scale.y);
 }
 
+sf::Sprite Sprite2DComponent::GetSprite() const
+{
+	return m_sprite;
+}
+
 sf::FloatRect Sprite2DComponent::GetBoundingBox() const
 {
 	return m_sprite.getGlobalBounds();

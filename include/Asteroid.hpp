@@ -15,6 +15,7 @@ public:
 
 private:
 	std::shared_ptr<Sprite2DComponent> m_spriteComponent;
+	sf::Transformable* m_transformable;
 };
 
 #endif // !ASTEROID_H

@@ -4,8 +4,7 @@
 #include "../include/ResourceManager.hpp"
 #include "../include/ButtonComponent.hpp"
 
-Button::Button(std::string id, std::string text, sf::Vector2f position, sf::Vector2f size, sf::Color idleColor, sf::Color hoverColor)
-	: BaseGameEntity(id, nullptr) {
+Button::Button(std::string id, std::string text, sf::Vector2f position, sf::Vector2f size, sf::Color idleColor, sf::Color hoverColor) : BaseGameEntity(id) {
 
 	m_buttonComponent = std::make_shared<ButtonComponent>(id, text, position, size, idleColor, hoverColor);
 	AddComponent("ButtonComponent", m_buttonComponent);

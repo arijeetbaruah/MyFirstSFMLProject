@@ -16,6 +16,7 @@ public:
 	void Update(sf::RenderWindow& window, sf::Time& elapsed) override;
 
 	sf::FloatRect GetBoundingBox() const;
+	sf::Sprite GetSprite() const;
 protected:
 	sf::Texture m_texture;
 	sf::Sprite m_sprite;

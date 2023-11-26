@@ -2,6 +2,7 @@
 #include "./BaseSceneState.hpp"
 
 class BaseGameEntity;
+class Asteroid;
 
 class GameState : public BaseSceneState
 {
@@ -14,6 +15,7 @@ public:
 
 private:
 	//BaseGameEntity* m_player;
+	std::shared_ptr<Asteroid> m_astriod1;
 };
 
 #endif
